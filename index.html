@@ -42,21 +42,20 @@
       // Для iOS: використання звичайного посилання для відкриття в браузері
       const iosChromeUrl = 'googlechrome://www.wikipedia.org'; 
 
-      // Спочатку спробуємо відкрити в Chrome на Android через intent://
+      // Перевірка користувача на Android
       if (navigator.userAgent.match(/android/i)) {
-        window.location.href = intentUrl;
+        window.location.href = intentUrl; // Відкриваємо через intent для Android
       }
-      // Для iOS, перевіряємо чи є Google Chrome, відкриваємо через googlechrome://
+      // Перевірка користувача на iOS
       else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
         setTimeout(function() {
-          window.location.href = iosChromeUrl;
+          window.location.href = iosChromeUrl; // Спробуємо відкрити через googlechrome:// на iOS
         }, 25);
         setTimeout(function() {
-          window.location.href = url; // Якщо Chrome не відкрився, відкриваємо через Safari або інший браузер
+          window.location.href = url; // Якщо Chrome не відкрився, відкриваємо через Safari
         }, 500);
-      }
-      else {
-        // Для інших платформ використовуємо стандартне відкриття посилання
+      } else {
+        // Для інших платформ, відкриваємо через стандартне посилання
         window.location.href = url;
       }
     });
