@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open in Google Chrome</title>
+  <title>Open in Chrome</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -33,20 +33,33 @@
   <button id="open-in-chrome">Open Wikipedia in Chrome</button>
 
   <script>
-    const openInChrome = () => {
-      const url = 'https://www.wikipedia.org'; // Замініть це посилання на потрібне
-      const chromeUrl = `googlechrome://${url.replace(/^https?:\/\//, '')}`;
+    document.getElementById('open-in-chrome').addEventListener('click', () => {
+      const url = 'https://www.wikipedia.org'; // Заміна на потрібне посилання
 
-      // Спробуємо відкрити посилання в Google Chrome
-      window.location.href = chromeUrl;
+      // Для Android: спробуємо відкрити в Google Chrome за допомогою intent://
+      const intentUrl = `intent://${url.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
 
-      // Резервний варіант: якщо Chrome URL не спрацює, відкриваємо звичайне посилання
-      setTimeout(() => {
+      // Для iOS: використання звичайного посилання для відкриття в браузері
+      const iosChromeUrl = 'googlechrome://www.wikipedia.org'; 
+
+      // Спочатку спробуємо відкрити в Chrome на Android через intent://
+      if (navigator.userAgent.match(/android/i)) {
+        window.location.href = intentUrl;
+      }
+      // Для iOS, перевіряємо чи є Google Chrome, відкриваємо через googlechrome://
+      else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+        setTimeout(function() {
+          window.location.href = iosChromeUrl;
+        }, 25);
+        setTimeout(function() {
+          window.location.href = url; // Якщо Chrome не відкрився, відкриваємо через Safari або інший браузер
+        }, 500);
+      }
+      else {
+        // Для інших платформ використовуємо стандартне відкриття посилання
         window.location.href = url;
-      }, 500);
-    };
-
-    document.getElementById('open-in-chrome').addEventListener('click', openInChrome);
+      }
+    });
   </script>
 </body>
 </html>
