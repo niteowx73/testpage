@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open in Chrome</title>
+  <title>Telegram Popup</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,25 +14,9 @@
       margin: 0;
       background-color: #f4f4f9;
     }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
 
     .popup {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
       background: rgba(0, 0, 0, 0.85);
       border-radius: 16px;
       padding: 20px;
@@ -40,6 +24,7 @@
       width: 90%;
       max-width: 400px;
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+      color: white;
     }
 
     .popup img {
@@ -52,13 +37,12 @@
       font-size: 16px;
       line-height: 1.5;
       margin-bottom: 20px;
-      color: white;
     }
 
     .popup .button {
-      display: flex;
-      justify-content: center;
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
       background: #fff;
       color: #000;
       font-size: 16px;
@@ -83,8 +67,6 @@
   </style>
 </head>
 <body>
-  <button id="open-in-chrome">Open Wikipedia in Chrome</button>
-
   <div class="popup">
     <img src="https://telegram.org/img/t_logo.svg" alt="Telegram logo">
     <p>Для зручного доступу до нашого Telegram-каналу, відкрийте це посилання у Safari або Google Chrome</p>
@@ -93,34 +75,5 @@
       Відкрити у Google Chrome
     </a>
   </div>
-
-  <script>
-    document.getElementById('open-in-chrome').addEventListener('click', () => {
-      const url = 'https://www.wikipedia.org'; // Заміна на потрібне посилання
-
-      // Для Android: спробуємо відкрити в Google Chrome за допомогою intent://
-      const intentUrl = `intent://${url.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
-
-      // Для iOS: використання звичайного посилання для відкриття в браузері
-      const iosChromeUrl = 'googlechrome://www.wikipedia.org'; 
-
-      // Перевірка користувача на Android
-      if (navigator.userAgent.match(/android/i)) {
-        window.location.href = intentUrl; // Відкриваємо через intent для Android
-      }
-      // Перевірка користувача на iOS
-      else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        setTimeout(function() {
-          window.location.href = iosChromeUrl; // Спробуємо відкрити через googlechrome:// на iOS
-        }, 25);
-        setTimeout(function() {
-          window.location.href = url; // Якщо Chrome не відкрився, відкриваємо через Safari
-        }, 500);
-      } else {
-        // Для інших платформ, відкриваємо через стандартне посилання
-        window.location.href = url;
-      }
-    });
-  </script>
 </body>
 </html>
