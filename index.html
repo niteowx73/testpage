@@ -28,7 +28,7 @@
       gap: 32px;
       width: 335px;
       padding: 32px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.35);
       border-radius: 8px;
       backdrop-filter: blur(2px);
       box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
@@ -47,24 +47,42 @@
       margin: 0;
     }
 
-    .popup .button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      color: #000;
-      font-size: 16px;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 16px 8px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      gap: 8px;
-      transition: background 0.3s, transform 0.2s;
-      cursor: pointer;
-      width: 100%;
-    }
+  .popup .button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.35);
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+    border: none;
+    gap: 8px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .popup .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .popup .button span {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .popup .button img {
+    width: 24px;
+    height: 24px;
+  }
+</style>
+
 
     .popup .button:hover {
       background: #f1f1f1;
