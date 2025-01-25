@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Open Wikipedia</title>
+  <title>Open in Google Chrome</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,23 +30,23 @@
   </style>
 </head>
 <body>
-  <button id="open-wikipedia">Open Wikipedia</button>
+  <button id="open-in-chrome">Open Wikipedia in Chrome</button>
 
   <script>
-    // Універсальна функція для відкриття посилання
-    const openLink = (url) => {
-      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-      if (!newWindow) {
-        // Якщо вкладки заблоковані, перенаправити поточну сторінку
+    const openInChrome = () => {
+      const url = 'https://www.wikipedia.org'; // Замініть це посилання на потрібне
+      const chromeUrl = `googlechrome://${url.replace(/^https?:\/\//, '')}`;
+
+      // Спробуємо відкрити посилання в Google Chrome
+      window.location.href = chromeUrl;
+
+      // Резервний варіант: якщо Chrome URL не спрацює, відкриваємо звичайне посилання
+      setTimeout(() => {
         window.location.href = url;
-      }
+      }, 500);
     };
 
-    // Додаємо подію до кнопки
-    document.getElementById('open-wikipedia').addEventListener('click', () => {
-      const wikipediaURL = 'https://www.wikipedia.org';
-      openLink(wikipediaURL);
-    });
+    document.getElementById('open-in-chrome').addEventListener('click', openInChrome);
   </script>
 </body>
 </html>
