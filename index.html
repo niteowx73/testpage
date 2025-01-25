@@ -84,18 +84,18 @@
       const intentUrl = `intent://${url.replace(/^https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
 
       // Для iOS: використання звичайного посилання для відкриття в браузері
-      const iosChromeUrl = 'googlechrome://www.wikipedia.org'; 
+      const iosChromeUrl = `googlechrome://${url.replace(/^https?:\/\//, '')}`;
 
       // Перевірка користувача на Android
-      if (navigator.userAgent.match(/android/i)) {
+      if (/android/i.test(navigator.userAgent)) {
         window.location.href = intentUrl; // Відкриваємо через intent для Android
       }
       // Перевірка користувача на iOS
-      else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        setTimeout(function() {
+      else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        setTimeout(() => {
           window.location.href = iosChromeUrl; // Спробуємо відкрити через googlechrome:// на iOS
         }, 25);
-        setTimeout(function() {
+        setTimeout(() => {
           window.location.href = url; // Якщо Chrome не відкрився, відкриваємо через Safari
         }, 500);
       } else {
