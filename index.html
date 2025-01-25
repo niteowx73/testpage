@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Universal Link Opener</title>
+  <title>Open Wikipedia</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh;
       margin: 0;
       background-color: #f4f4f9;
     }
@@ -18,11 +18,11 @@
       background-color: #007BFF;
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 15px 30px;
       font-size: 16px;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #0056b3;
@@ -30,23 +30,22 @@
   </style>
 </head>
 <body>
-  <button id="open-link">Open Link</button>
+  <button id="open-wikipedia">Open Wikipedia</button>
 
   <script>
-    // Універсальна функція для відкриття посилань
-    const openUniversalLink = (url) => {
+    // Універсальна функція для відкриття посилання
+    const openLink = (url) => {
       const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
       if (!newWindow) {
-        // Якщо popup заблокований, відкриваємо посилання у поточному вікні
+        // Якщо вкладки заблоковані, перенаправити поточну сторінку
         window.location.href = url;
       }
     };
 
-    // Додаємо подію на кнопку
-    document.getElementById('open-link').addEventListener('click', () => {
-      // Заміни URL на потрібне посилання
-      const url = 'https://ru.wikipedia.org/wiki/';
-      openUniversalLink(url);
+    // Додаємо подію до кнопки
+    document.getElementById('open-wikipedia').addEventListener('click', () => {
+      const wikipediaURL = 'https://www.wikipedia.org';
+      openLink(wikipediaURL);
     });
   </script>
 </body>
