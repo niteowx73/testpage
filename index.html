@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universal Link Opener</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <button id="open-link">Open Link</button>
+
+  <script>
+    // Універсальна функція для відкриття посилань
+    const openUniversalLink = (url) => {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!newWindow) {
+        // Якщо popup заблокований, відкриваємо посилання у поточному вікні
+        window.location.href = url;
+      }
+    };
+
+    // Додаємо подію на кнопку
+    document.getElementById('open-link').addEventListener('click', () => {
+      // Заміни URL на потрібне посилання
+      const url = 'https://ru.wikipedia.org/wiki/';
+      openUniversalLink(url);
+    });
+  </script>
+</body>
+</html>
